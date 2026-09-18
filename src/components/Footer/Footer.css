@@ -23,12 +23,19 @@
 
 .footer-logo {
   display: inline-block;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .footer-logo img {
-  height: 44px;
+  height: 68px;
   width: auto;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.footer-logo:hover img {
+  transform: scale(1.03);
 }
 
 .footer-social-links {

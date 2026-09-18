@@ -43,7 +43,13 @@ export default function PromoCards({ onNavigateShop }) {
       <div className="container">
         <div className="promo-cards-grid">
           {PROMO_CARDS.map((card) => (
-            <div key={card.id} className={`promo-card theme-${card.theme}`}>
+            <div 
+              key={card.id} 
+              className={`promo-card theme-${card.theme}`}
+              onClick={() => {
+                if (onNavigateShop) onNavigateShop();
+              }}
+            >
               <div className="promo-card-content">
                 {card.badge && (
                   <span className={`promo-badge ${card.badgeType}`}>

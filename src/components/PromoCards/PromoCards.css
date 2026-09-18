@@ -9,35 +9,102 @@
   gap: 24px;
 }
 
+/* Card Base with Smooth Hover & Ambient Presence */
 .promo-card {
   position: relative;
   min-height: 220px;
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 28px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
 }
 
 .promo-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.15);
 }
 
-/* Card Themes */
+/* Continuous Subtle Shimmer Sweep across the Cards */
+.promo-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -120%;
+  width: 60%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.26) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(26deg);
+  pointer-events: none;
+  z-index: 3;
+  animation: cardShimmerSweep 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.promo-card:nth-child(1)::before {
+  animation-delay: 0.2s;
+}
+
+.promo-card:nth-child(2)::before {
+  animation-delay: 2.2s;
+}
+
+.promo-card:nth-child(3)::before {
+  animation-delay: 4.2s;
+}
+
+@keyframes cardShimmerSweep {
+  0% {
+    left: -120%;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  38% {
+    left: 190%;
+    opacity: 1;
+  }
+  39%, 100% {
+    left: 190%;
+    opacity: 0;
+  }
+}
+
+/* Card Themes with Subtle Breathing Gradients */
 .promo-card.theme-yellow {
-  background: linear-gradient(135deg, #f8b808 0%, #ffc524 100%);
+  background: linear-gradient(135deg, #f8b808 0%, #ffc524 50%, #f8b808 100%);
+  background-size: 200% 200%;
+  animation: gradientPulse 7s ease-in-out infinite;
 }
 
 .promo-card.theme-blue-grey {
-  background: linear-gradient(135deg, #dcecf6 0%, #ebf4f9 100%);
+  background: linear-gradient(135deg, #dcecf6 0%, #ebf4f9 50%, #dcecf6 100%);
+  background-size: 200% 200%;
+  animation: gradientPulse 7s ease-in-out 2.3s infinite;
 }
 
 .promo-card.theme-teal {
-  background: linear-gradient(135deg, #1cbfa0 0%, #2bd6b5 100%);
+  background: linear-gradient(135deg, #1cbfa0 0%, #2bd6b5 50%, #1cbfa0 100%);
+  background-size: 200% 200%;
+  animation: gradientPulse 7s ease-in-out 4.6s infinite;
+}
+
+@keyframes gradientPulse {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 /* Content Area */
@@ -50,16 +117,32 @@
   max-width: 55%;
 }
 
+/* Continuous Pulsing "NEW!" Tag */
 .promo-badge.tag-red {
   background-color: var(--accent-red);
   color: #ffffff;
   font-size: 11px;
   font-weight: 800;
-  padding: 3px 8px;
-  border-radius: 3px;
-  letter-spacing: 0.5px;
+  padding: 3px 9px;
+  border-radius: 4px;
+  letter-spacing: 0.6px;
   margin-bottom: 8px;
-  box-shadow: 0 2px 4px rgba(234, 42, 42, 0.3);
+  display: inline-flex;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(234, 42, 42, 0.4);
+  animation: badgeGlowPulse 2.2s ease-in-out infinite;
+  will-change: transform, box-shadow;
+}
+
+@keyframes badgeGlowPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 2px 6px rgba(234, 42, 42, 0.4);
+  }
+  50% {
+    transform: scale(1.06);
+    box-shadow: 0 2px 14px rgba(234, 42, 42, 0.85);
+  }
 }
 
 .promo-subtitle.text-gold {
@@ -96,8 +179,12 @@
   margin-top: 2px;
 }
 
+/* Animated "Shop now" Button with Periodic Gleam */
 .promo-btn {
-  display: inline-block;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background-color: #ffffff;
   color: #181b1e;
   font-family: var(--font-body);
@@ -106,17 +193,59 @@
   padding: 8px 22px;
   border-radius: 4px;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+.promo-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.7) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-20deg);
+  animation: btnGleam 4.5s ease-in-out infinite;
+}
+
+.promo-card:nth-child(1) .promo-btn::after {
+  animation-delay: 0.8s;
+}
+
+.promo-card:nth-child(2) .promo-btn::after {
+  animation-delay: 2.3s;
+}
+
+.promo-card:nth-child(3) .promo-btn::after {
+  animation-delay: 3.8s;
+}
+
+@keyframes btnGleam {
+  0%, 75% {
+    left: -100%;
+  }
+  90% {
+    left: 180%;
+  }
+  100% {
+    left: 180%;
+  }
 }
 
 .promo-btn:hover {
   background-color: #181b1e;
   color: #ffffff;
-  transform: translateY(-1px);
-  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
 }
 
-/* Image Area */
+/* Image Area with Continuous 3D Floating Animations */
 .promo-card-image-wrapper {
   position: absolute;
   right: 12px;
@@ -133,12 +262,61 @@
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  transition: transform 0.35s ease;
-  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.15));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  will-change: transform, filter;
 }
 
+/* Continuous Floating Animations for Each Tool */
+.promo-card.theme-yellow .promo-image {
+  animation: toolFloat1 3.6s ease-in-out infinite;
+}
+
+.promo-card.theme-blue-grey .promo-image {
+  animation: toolFloat2 4.2s ease-in-out 0.6s infinite;
+}
+
+.promo-card.theme-teal .promo-image {
+  animation: toolFloat3 3.9s ease-in-out 1.2s infinite;
+}
+
+@keyframes toolFloat1 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+    filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.16));
+  }
+  50% {
+    transform: translateY(-10px) rotate(1.2deg) scale(1.02);
+    filter: drop-shadow(0 20px 24px rgba(0, 0, 0, 0.24));
+  }
+}
+
+@keyframes toolFloat2 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+    filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.16));
+  }
+  50% {
+    transform: translateY(-11px) rotate(-1.5deg) scale(1.02);
+    filter: drop-shadow(0 22px 26px rgba(0, 0, 0, 0.22));
+  }
+}
+
+@keyframes toolFloat3 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+    filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.16));
+  }
+  50% {
+    transform: translateY(-10px) rotate(1.4deg) scale(1.02);
+    filter: drop-shadow(0 20px 24px rgba(0, 0, 0, 0.25));
+  }
+}
+
+/* Interactive Hover enhancement */
 .promo-card:hover .promo-image {
-  transform: scale(1.05);
+  animation-play-state: paused;
+  transform: translateY(-12px) scale(1.08) !important;
+  filter: drop-shadow(0 24px 28px rgba(0, 0, 0, 0.28)) !important;
 }
 
 /* --- Responsive Layout --- */

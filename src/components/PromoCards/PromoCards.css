@@ -1,0 +1,160 @@
+.promo-cards-section {
+  padding: 40px 0;
+  background-color: #ffffff;
+}
+
+.promo-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.promo-card {
+  position: relative;
+  min-height: 220px;
+  border-radius: 6px;
+  padding: 28px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.promo-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* Card Themes */
+.promo-card.theme-yellow {
+  background: linear-gradient(135deg, #f8b808 0%, #ffc524 100%);
+}
+
+.promo-card.theme-blue-grey {
+  background: linear-gradient(135deg, #dcecf6 0%, #ebf4f9 100%);
+}
+
+.promo-card.theme-teal {
+  background: linear-gradient(135deg, #1cbfa0 0%, #2bd6b5 100%);
+}
+
+/* Content Area */
+.promo-card-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 55%;
+}
+
+.promo-badge.tag-red {
+  background-color: var(--accent-red);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 3px;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  box-shadow: 0 2px 4px rgba(234, 42, 42, 0.3);
+}
+
+.promo-subtitle.text-gold {
+  color: #c97500;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.promo-subtitle.text-white {
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.promo-title {
+  font-family: var(--font-heading);
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.05;
+  color: #181b1e;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.promo-action {
+  margin-top: 2px;
+}
+
+.promo-btn {
+  display: inline-block;
+  background-color: #ffffff;
+  color: #181b1e;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 22px;
+  border-radius: 4px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  transition: all 0.2s ease;
+}
+
+.promo-btn:hover {
+  background-color: #181b1e;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Image Area */
+.promo-card-image-wrapper {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 48%;
+  height: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.promo-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.35s ease;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.15));
+}
+
+.promo-card:hover .promo-image {
+  transform: scale(1.05);
+}
+
+/* --- Responsive Layout --- */
+@media (max-width: 1024px) {
+  .promo-title {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 860px) {
+  .promo-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .promo-card {
+    min-height: 190px;
+  }
+}

@@ -1,0 +1,532 @@
+/* ==========================================================================
+   SITE HEADER & MEGA MENU STYLES
+   ========================================================================== */
+
+.site-header {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+  font-family: var(--font-nav);
+}
+
+/* --- Top Dark Header --- */
+.header-top {
+  background-color: var(--dark-header, #191919);
+  color: #ffffff;
+  padding: 12px 0;
+}
+
+.header-top-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* --- Logo --- */
+.header-logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.header-logo img {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* --- Search Bar --- */
+.header-search {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 4px;
+  height: 40px;
+  flex: 1;
+  max-width: 560px;
+  position: relative;
+  overflow: visible;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.search-category-dropdown {
+  position: relative;
+  height: 100%;
+}
+
+.category-btn {
+  height: 100%;
+  padding: 0 14px;
+  background-color: transparent;
+  border: none;
+  border-right: 1px solid #e2e8f0;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-nav);
+  font-size: 13px;
+  font-weight: 500;
+  color: #444444;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.category-btn:hover {
+  background-color: #f7f7f7;
+}
+
+.category-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  min-width: 210px;
+  z-index: 1000;
+  max-height: 320px;
+  overflow-y: auto;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.category-menu li {
+  padding: 10px 16px;
+  font-family: var(--font-nav);
+  font-size: 13px;
+  color: #333333;
+  cursor: pointer;
+  border-bottom: 1px solid #f1f5f9;
+  transition: all 0.15s ease;
+}
+
+.category-menu li:hover {
+  background-color: #fff9e6;
+  color: #b38100;
+  font-weight: 600;
+}
+
+.search-input {
+  flex: 1;
+  height: 100%;
+  border: none;
+  outline: none;
+  padding: 0 14px;
+  font-family: var(--font-nav);
+  font-size: 13px;
+  color: #222222;
+  min-width: 0;
+}
+
+.search-input::placeholder {
+  color: #8e8e8e;
+  font-weight: 400;
+}
+
+.search-submit-btn {
+  height: 100%;
+  padding: 0 24px;
+  background-color: var(--primary-yellow, #fcb900);
+  color: #000000;
+  font-family: var(--font-nav);
+  font-weight: 700;
+  font-size: 13.5px;
+  border: none;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.search-submit-btn:hover {
+  background-color: var(--primary-yellow-hover, #e8a800);
+}
+
+/* --- Contact & Location Group --- */
+.header-info-group {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-shrink: 0;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.info-icon {
+  color: var(--primary-yellow, #fcb900);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.info-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-title {
+  font-family: var(--font-nav);
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  line-height: 1.25;
+  color: #ffffff;
+}
+
+.info-desc {
+  font-family: var(--font-nav);
+  font-size: 11.5px;
+  color: #d1d5db;
+  line-height: 1.25;
+}
+
+/* Exact match: "Click to discover" has underline */
+.info-item:first-child .info-desc {
+  text-decoration: underline;
+}
+
+.info-divider {
+  width: 1px;
+  height: 28px;
+  background-color: #33383f;
+}
+
+/* --- Mobile Toggle --- */
+.mobile-menu-toggle {
+  display: none;
+  color: var(--primary-yellow, #fcb900);
+  padding: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* --- Main Yellow Navigation Bar --- */
+.header-nav {
+  background-color: var(--primary-yellow, #fcb900);
+  color: #000000;
+  height: var(--nav-height, 46px);
+  position: relative;
+}
+
+.header-nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  position: relative;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  height: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.nav-item > a {
+  font-family: var(--font-nav);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #000000;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  position: relative;
+  letter-spacing: 0.1px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* Exact underline on active menu item */
+.nav-item.active > a::after {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #000000;
+}
+
+.nav-item:hover > a {
+  color: #000000;
+}
+
+/* --- Right Nav Actions ("My account" and "0 / 0") --- */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.nav-action-text {
+  font-family: var(--font-nav);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #000000;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+.nav-action-text:hover {
+  opacity: 0.8;
+}
+
+.cart-counter {
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   BRAND MEGA MENU (Exact match to screenshot)
+   ========================================================================== */
+
+.nav-item.mega-dropdown-trigger {
+  position: static; /* Allows menu to align with header-nav-container */
+}
+
+.brand-mega-menu {
+  position: absolute;
+  top: 100%;
+  left: 20px; /* Aligned with the container padding (same as Home link) */
+  width: 880px;
+  max-width: calc(100% - 40px);
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-top: none;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.14);
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  z-index: 999;
+  animation: megaMenuFadeIn 0.18s ease-out;
+}
+
+@keyframes megaMenuFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 6-Column Grid */
+.brand-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  background-color: #ffffff;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  overflow: hidden;
+}
+
+.brand-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 10px 14px 10px;
+  text-decoration: none;
+  background-color: #ffffff;
+  border-right: 1px solid #eef0f3;
+  border-bottom: 1px solid #eef0f3;
+  height: 106px;
+  box-sizing: border-box;
+  transition: background-color 0.15s ease;
+}
+
+.brand-card:hover {
+  background-color: #f9fafb;
+}
+
+/* Remove right border on 6th column */
+.brand-card:nth-child(6n) {
+  border-right: none;
+}
+
+/* Remove bottom border on the second row (items 7 through 12) */
+.brand-card:nth-child(n+7) {
+  border-bottom: none;
+}
+
+.brand-card.empty-card {
+  background-color: #ffffff;
+  pointer-events: none;
+}
+
+.brand-card.empty-card:hover {
+  background-color: #ffffff;
+}
+
+.brand-logo-wrap {
+  height: 48px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.brand-logo-img {
+  max-height: 44px;
+  max-width: 88%;
+  object-fit: contain;
+  display: block;
+}
+
+.brand-name {
+  font-family: var(--font-nav);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 1100px) {
+  .brand-mega-menu {
+    width: calc(100% - 40px);
+  }
+}
+
+@media (max-width: 992px) {
+  .header-info-group {
+    display: none;
+  }
+  
+  .brand-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .brand-card:nth-child(6n) {
+    border-right: 1px solid #eef0f3;
+  }
+  
+  .brand-card:nth-child(3n) {
+    border-right: none;
+  }
+  
+  .brand-card:nth-child(n+7) {
+    border-bottom: 1px solid #eef0f3;
+  }
+  
+  .brand-card:nth-child(n+10) {
+    border-bottom: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-toggle {
+    display: block;
+  }
+
+  .header-search {
+    display: none;
+  }
+
+  .header-nav {
+    display: none;
+    height: auto;
+  }
+
+  .header-nav.mobile-open {
+    display: block;
+    padding: 16px 0;
+  }
+
+  .header-nav.mobile-open .header-nav-container {
+    flex-direction: column;
+    height: auto;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+    height: auto;
+  }
+
+  .nav-item {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-item > a {
+    height: 38px;
+    width: 100%;
+  }
+
+  .nav-item.mega-dropdown-trigger {
+    position: relative;
+    width: 100%;
+  }
+
+  .brand-mega-menu {
+    position: static;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+    margin-top: 8px;
+    box-shadow: none;
+  }
+
+  .brand-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .brand-card:nth-child(3n) {
+    border-right: 1px solid #eef0f3;
+  }
+
+  .brand-card:nth-child(2n) {
+    border-right: none;
+  }
+
+  .brand-card.empty-card {
+    display: none;
+  }
+
+  .nav-actions {
+    width: 100%;
+    padding-top: 14px;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+    justify-content: space-between;
+  }
+}

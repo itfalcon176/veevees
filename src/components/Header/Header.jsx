@@ -105,14 +105,16 @@ export default function Header({ currentPage = 'home', onNavigate }) {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    if (searchQuery.trim()) {
-      alert(`Searching for "${searchQuery}" in ${selectedCategory}`);
+    if (onNavigate) {
+      onNavigate('shop', { 
+        query: searchQuery, 
+        category: selectedCategory === 'Category' ? 'all' : selectedCategory 
+      });
     }
   };
 
   const handleNavClick = (page) => (e) => {
     e.preventDefault();
-    setActiveTab(page);
     setIsMobileMenuOpen(false);
     setIsBrandOpen(false);
     if (onNavigate) {
@@ -124,7 +126,9 @@ export default function Header({ currentPage = 'home', onNavigate }) {
     e.preventDefault();
     setIsBrandOpen(false);
     setIsMobileMenuOpen(false);
-    alert(`Selected brand: ${brand.name}`);
+    if (onNavigate) {
+      onNavigate('shop', { brand: brand.name });
+    }
   };
 
   return (
@@ -291,7 +295,7 @@ export default function Header({ currentPage = 'home', onNavigate }) {
                 </div>
               )}
             </li>
-            <li className="nav-item">
+            <li className={`nav-item ${currentPage === 'shop' && !isBrandOpen ? 'active' : ''}`}>
               <a href="#shop" onClick={handleNavClick('shop')}>
                 Shop
               </a>

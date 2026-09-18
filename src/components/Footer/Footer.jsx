@@ -41,10 +41,10 @@ export default function Footer() {
           <div className="footer-left-col">
             <a href="#" className="footer-logo">
               <img 
-                src="/images/logoy.png" 
+                src="/images/logo-header.png" 
                 alt="VeeVees Trading Corporation" 
                 onError={(e) => {
-                  e.target.src = "/images/logo-new.png";
+                  e.target.src = "/images/logoy.png";
                 }}
               />
             </a>

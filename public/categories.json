@@ -1,0 +1,35 @@
+[
+  {
+    "id": 193,
+    "name": "Super Steel",
+    "slug": "super-steel",
+    "description": "",
+    "parent": 0,
+    "count": 3,
+    "image": null,
+    "review_count": 1,
+    "permalink": "https://localhost/veevees/product-category/super-steel/"
+  },
+  {
+    "id": 192,
+    "name": "Vertigo Gold",
+    "slug": "vertigo-gold",
+    "description": "",
+    "parent": 0,
+    "count": 1,
+    "image": null,
+    "review_count": 0,
+    "permalink": "https://localhost/veevees/product-category/vertigo-gold/"
+  },
+  {
+    "id": 194,
+    "name": "Wood Cutter",
+    "slug": "wood-cutter",
+    "description": "",
+    "parent": 0,
+    "count": 2,
+    "image": null,
+    "review_count": 1,
+    "permalink": "https://localhost/veevees/product-category/wood-cutter/"
+  }
+]

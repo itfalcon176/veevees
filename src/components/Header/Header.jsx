@@ -7,88 +7,80 @@ const BRANDS = [
     id: 'super-steel',
     name: 'Super Steel',
     logo: '/images/WhatsApp-Image-2024-12-21-at-12.14.05-PM.jpeg',
-    href: '#brand-super-steel'
+    href: '/shop/?brand=Super%20Steel'
   },
   {
     id: 'vertigo-gold',
     name: 'Vertigo Gold',
     logo: '/images/Untitled_design__2_-removebg-preview.png',
-    href: '#brand-vertigo-gold'
+    href: '/shop/?brand=Vertigo%20Gold'
   },
   {
     id: 'logger',
     name: 'Logger',
     logo: '/images/WhatsApp-Image-2024-12-21-at-12.14.04-PM.jpeg',
-    href: '#brand-logger'
+    href: '/shop/?brand=Logger'
   },
   {
     id: 'topper',
     name: 'Topper',
     logo: '/images/WhatsApp-Image-2024-12-21-at-12.14.06-PM.jpeg',
-    href: '#brand-topper'
+    href: '/shop/?brand=Topper'
   },
   {
     id: 'makita',
     name: 'Makita',
     logo: '/images/Untitled-design-4.jpg',
-    href: '#brand-makita'
+    href: '/shop/?brand=Makita'
   },
   {
     id: 'de-neers',
     name: 'De Neers',
     logo: '/images/Untitled-design-5.jpg',
-    href: '#brand-de-neers'
+    href: '/shop/?brand=De%20Neers'
   },
   {
     id: 'golden-steel',
     name: 'Golden Steel',
     logo: '/images/WhatsApp-Image-2024-12-21-at-12.14.06-PM-2.jpeg',
-    href: '#brand-golden-steel'
+    href: '/shop/?brand=Golden%20Steel'
   },
   {
     id: 'wood-cutter',
     name: 'Wood Cutter',
     logo: '/images/WhatsApp-Image-2024-12-21-at-12.14.06-PM-1.jpeg',
-    href: '#brand-wood-cutter'
+    href: '/shop/?brand=Wood%20Cutter'
   },
   {
     id: 'gg-tools',
     name: 'GG Tools',
     logo: '/images/WhatsApp-Image-2024-12-21-at-12.14.07-PM.jpeg',
-    href: '#brand-gg-tools'
+    href: '/shop/?brand=GG%20Tools'
   }
 ];
 
-const CATEGORIES = [
-  'All Categories',
-  'Cordless Tools',
-  'Electric Power Tools',
-  'Gas Power Tools',
-  'Pliers, Sockets',
-  'Pounding & Prying',
-  'Cutting Tools',
-  'Replacement Pumps',
-  'Nailers & Staplers',
-  'Safety & Protection'
+const SEARCH_CATEGORIES = [
+  { value: '', label: 'Category' },
+  { value: 'super-steel', label: 'Super Steel' },
+  { value: 'uncategorized', label: 'Uncategorized' },
+  { value: 'vertigo-gold', label: 'Vertigo Gold' },
+  { value: 'wood-cutter', label: 'Wood Cutter' }
 ];
 
 export default function Header({ currentPage = 'home', onNavigate }) {
-  const [selectedCategory, setSelectedCategory] = useState('Category');
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
-  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isBrandOpen, setIsBrandOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const brandMenuRef = useRef(null);
   const brandNavRef = useRef(null);
-  const categoryRef = useRef(null);
 
-  // Close menus on outside click
+  // Close menus on outside click only when mega menu is open
   useEffect(() => {
+    if (!isBrandOpen) return;
+
     const handleClickOutside = (e) => {
-      if (categoryRef.current && !categoryRef.current.contains(e.target)) {
-        setIsCategoryOpen(false);
-      }
       if (
         brandNavRef.current && 
         !brandNavRef.current.contains(e.target) &&
@@ -99,22 +91,26 @@ export default function Header({ currentPage = 'home', onNavigate }) {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+    // Listen on 'click' rather than 'mousedown' to avoid cancelling pending click events
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [isBrandOpen]);
 
   const handleSearch = (e) => {
     e.preventDefault();
     if (onNavigate) {
       onNavigate('shop', { 
         query: searchQuery, 
-        category: selectedCategory === 'Category' ? 'all' : selectedCategory 
+        category: selectedCategory 
       });
     }
   };
 
   const handleNavClick = (page) => (e) => {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     setIsMobileMenuOpen(false);
     setIsBrandOpen(false);
     if (onNavigate) {
@@ -138,7 +134,7 @@ export default function Header({ currentPage = 'home', onNavigate }) {
         <div className="container header-top-container">
           {/* Logo */}
           <a 
-            href="#home" 
+            href="/" 
             className="header-logo"
             onClick={handleNavClick('home')}
           >
@@ -153,30 +149,20 @@ export default function Header({ currentPage = 'home', onNavigate }) {
 
           {/* Search Box */}
           <form className="header-search" onSubmit={handleSearch}>
-            <div className="search-category-dropdown" ref={categoryRef}>
-              <button 
-                type="button" 
-                className="category-btn"
-                onClick={() => setIsCategoryOpen(!isCategoryOpen)}
+            <div className="search-category-dropdown">
+              <select 
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="category-select"
+                aria-label="Select Category"
               >
-                <span>{selectedCategory}</span>
-                <ChevronDown size={14} />
-              </button>
-              {isCategoryOpen && (
-                <ul className="category-menu">
-                  {CATEGORIES.map((cat, idx) => (
-                    <li 
-                      key={idx}
-                      onClick={() => {
-                        setSelectedCategory(cat === 'All Categories' ? 'Category' : cat);
-                        setIsCategoryOpen(false);
-                      }}
-                    >
-                      {cat}
-                    </li>
-                  ))}
-                </ul>
-              )}
+                {SEARCH_CATEGORIES.map((cat, idx) => (
+                  <option key={idx} value={cat.value}>
+                    {cat.label}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown size={14} className="category-select-arrow" />
             </div>
             <input 
               type="text" 
@@ -236,12 +222,12 @@ export default function Header({ currentPage = 'home', onNavigate }) {
         <div className="container header-nav-container">
           <ul className="nav-links">
             <li className={`nav-item ${currentPage === 'home' && !isBrandOpen ? 'active' : ''}`}>
-              <a href="#home" onClick={handleNavClick('home')}>
+              <a href="/" onClick={handleNavClick('home')}>
                 Home
               </a>
             </li>
             <li className={`nav-item ${currentPage === 'about' && !isBrandOpen ? 'active' : ''}`}>
-              <a href="#about-us" onClick={handleNavClick('about')}>
+              <a href="/about-us/" onClick={handleNavClick('about')}>
                 About us
               </a>
             </li>
@@ -252,7 +238,7 @@ export default function Header({ currentPage = 'home', onNavigate }) {
               onMouseLeave={() => setIsBrandOpen(false)}
             >
               <a 
-                href="#brands" 
+                href="/shop/" 
                 onClick={(e) => { 
                   e.preventDefault(); 
                   setIsBrandOpen(!isBrandOpen); 
@@ -296,12 +282,12 @@ export default function Header({ currentPage = 'home', onNavigate }) {
               )}
             </li>
             <li className={`nav-item ${currentPage === 'shop' && !isBrandOpen ? 'active' : ''}`}>
-              <a href="#shop" onClick={handleNavClick('shop')}>
+              <a href="/shop/" onClick={handleNavClick('shop')}>
                 Shop
               </a>
             </li>
-            <li className="nav-item">
-              <a href="#contact" onClick={handleNavClick('contact')}>
+            <li className={`nav-item ${currentPage === 'contact' && !isBrandOpen ? 'active' : ''}`}>
+              <a href="/contact-us/" onClick={handleNavClick('contact')}>
                 Contact us
               </a>
             </li>
@@ -309,10 +295,18 @@ export default function Header({ currentPage = 'home', onNavigate }) {
 
           {/* Right Action Items: Exact text matching screenshot "My account" and "0 / 0" */}
           <div className="nav-actions">
-            <a href="#account" className="nav-action-text">
+            <a 
+              href="/my-account/" 
+              className="nav-action-text"
+              onClick={(e) => e.preventDefault()}
+            >
               My account
             </a>
-            <a href="#cart" className="nav-action-text cart-counter">
+            <a 
+              href="/cart/" 
+              className="nav-action-text cart-counter"
+              onClick={(e) => e.preventDefault()}
+            >
               0 / 0
             </a>
           </div>

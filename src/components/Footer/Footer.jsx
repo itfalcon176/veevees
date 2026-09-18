@@ -9,7 +9,7 @@ import {
 } from 'lucide-react';
 import './Footer.css';
 
-export default function Footer() {
+export default function Footer({ onNavigate }) {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
@@ -39,7 +39,14 @@ export default function Footer() {
         <div className="container footer-main-container">
           {/* Left Column - Brand & Address */}
           <div className="footer-left-col">
-            <a href="#" className="footer-logo">
+            <a 
+              href="/" 
+              className="footer-logo"
+              onClick={(e) => {
+                e.preventDefault();
+                if (onNavigate) onNavigate('home');
+              }}
+            >
               <img 
                 src="/images/logo-header.png" 
                 alt="VeeVees Trading Corporation" 
@@ -155,12 +162,38 @@ export default function Footer() {
           <div className="container footer-bottom-container">
             <div className="footer-copyright-text">
               <span>© 2026 VeeVees. All rights reserved.</span>
+              <a 
+                href="/terms-and-conditions/"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  if (onNavigate) onNavigate('terms');
+                }}
+              >
+                Terms and Conditions
+              </a>
               <span className="footer-divider">|</span>
-              <a href="#terms">Terms and Conditions</a>
+              <a 
+                href="/privacy-policy/"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  if (onNavigate) onNavigate('privacy');
+                }}
+              >
+                Privacy Policy
+              </a>
               <span className="footer-divider">|</span>
-              <a href="#privacy">Privacy Policy</a>
-              <span className="footer-divider">|</span>
-              <a href="#sitemap">Sitemap</a>
+              <a 
+                href="/sitemap/"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  if (onNavigate) onNavigate('sitemap');
+                }}
+              >
+                Sitemap
+              </a>
             </div>
 
             <div className="footer-payment-methods">

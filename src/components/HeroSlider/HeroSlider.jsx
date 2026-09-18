@@ -13,7 +13,7 @@ const SLIDES = [
     secondaryColor: '#ffb700',
     align: 'left',
     btnText: 'Shop now',
-    link: '#shop'
+    link: '/shop/'
   },
   {
     id: 2,
@@ -25,7 +25,7 @@ const SLIDES = [
     secondaryColor: '#ffb700',
     align: 'right',
     btnText: 'Shop now',
-    link: '#shop'
+    link: '/shop/'
   },
   {
     id: 3,
@@ -37,11 +37,11 @@ const SLIDES = [
     secondaryColor: '#ffb700',
     align: 'left',
     btnText: 'Shop now',
-    link: '#shop'
+    link: '/shop/'
   }
 ];
 
-export default function HeroSlider() {
+export default function HeroSlider({ onNavigateShop }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const timerRef = useRef(null);
@@ -98,7 +98,14 @@ export default function HeroSlider() {
                     {slide.secondaryTitle}
                   </h3>
                   <div className="slide-btn-wrapper">
-                    <a href={slide.link} className="slide-btn">
+                    <a 
+                      href={slide.link} 
+                      className="slide-btn"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (onNavigateShop) onNavigateShop();
+                      }}
+                    >
                       <span>{slide.btnText}</span>
                       <ArrowRight size={16} />
                     </a>

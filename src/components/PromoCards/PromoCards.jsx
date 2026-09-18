@@ -9,7 +9,7 @@ const PROMO_CARDS = [
     titleLine1: 'CUTTING',
     titleLine2: 'TOOLS',
     image: '/images/s21-1.png',
-    link: '#shop',
+    link: '/shop/',
     btnText: 'Shop now',
     theme: 'yellow'
   },
@@ -20,7 +20,7 @@ const PROMO_CARDS = [
     titleLine1: 'DRILL',
     titleLine2: 'TOOL KIT',
     image: '/images/s22.png',
-    link: '#shop',
+    link: '/shop/',
     btnText: 'Shop now',
     theme: 'blue-grey'
   },
@@ -31,13 +31,13 @@ const PROMO_CARDS = [
     titleLine1: 'SANDER',
     titleLine2: 'MACHINE',
     image: '/images/s23.png',
-    link: '#shop',
+    link: '/shop/',
     btnText: 'Shop now',
     theme: 'teal'
   }
 ];
 
-export default function PromoCards() {
+export default function PromoCards({ onNavigateShop }) {
   return (
     <section className="promo-cards-section">
       <div className="container">
@@ -60,7 +60,14 @@ export default function PromoCards() {
                   <span>{card.titleLine2}</span>
                 </h3>
                 <div className="promo-action">
-                  <a href={card.link} className="promo-btn">
+                  <a 
+                    href={card.link} 
+                    className="promo-btn"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (onNavigateShop) onNavigateShop();
+                    }}
+                  >
                     {card.btnText}
                   </a>
                 </div>

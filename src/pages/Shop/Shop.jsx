@@ -113,7 +113,7 @@ export default function Shop({
       <div className="shop-breadcrumbs-bar">
         <div className="container">
           <nav className="breadcrumbs-nav" aria-label="Breadcrumb">
-            <a href="#home" onClick={(e) => { e.preventDefault(); onNavigateHome(); }}>
+            <a href="/" onClick={(e) => { e.preventDefault(); onNavigateHome(); }}>
               Home
             </a>
             <ChevronRight size={14} className="breadcrumb-sep" />
@@ -376,7 +376,7 @@ export default function Shop({
 
                       <h3 className="product-card-title">
                         <a 
-                          href={`#product/${product.slug}`}
+                          href={`/product/${product.slug}/`}
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();

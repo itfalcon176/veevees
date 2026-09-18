@@ -6,62 +6,62 @@ const BRANDS_LIST = [
   {
     name: 'Super Steel',
     logo: '/images/WhatsApp-Image-2024-12-21-at-12.14.05-PM.jpeg',
-    link: '#shop'
+    link: '/shop/?brand=Super%20Steel'
   },
   {
     name: 'Vertigo Gold',
     logo: '/images/Untitled_design__2_-removebg-preview.png',
-    link: '#shop'
+    link: '/shop/?brand=Vertigo%20Gold'
   },
   {
     name: 'Logger',
     logo: '/images/WhatsApp-Image-2024-12-21-at-12.14.04-PM.jpeg',
-    link: '#shop'
+    link: '/shop/?brand=Logger'
   },
   {
     name: 'Topper',
     logo: '/images/WhatsApp-Image-2024-12-21-at-12.14.06-PM.jpeg',
-    link: '#shop'
+    link: '/shop/?brand=Topper'
   },
   {
     name: 'Makita',
     logo: '/images/Untitled-design-4.jpg',
-    link: '#shop'
+    link: '/shop/?brand=Makita'
   },
   {
     name: 'De Neers',
     logo: '/images/Untitled-design-5.jpg',
-    link: '#shop'
+    link: '/shop/?brand=De%20Neers'
   },
   {
     name: 'Golden Steel',
     logo: '/images/WhatsApp-Image-2024-12-21-at-12.14.06-PM-2.jpeg',
-    link: '#shop'
+    link: '/shop/?brand=Golden%20Steel'
   },
   {
     name: 'Wood Cutter',
     logo: '/images/WhatsApp-Image-2024-12-21-at-12.14.06-PM-1.jpeg',
-    link: '#shop'
+    link: '/shop/?brand=Wood%20Cutter'
   },
   {
     name: 'GG Tools',
     logo: '/images/WhatsApp-Image-2024-12-21-at-12.14.07-PM.jpeg',
-    link: '#shop'
+    link: '/shop/?brand=GG%20Tools'
   }
 ];
 
-export default function AboutUs({ onNavigateHome }) {
+export default function AboutUs({ onNavigateHome, onNavigateShop }) {
   return (
     <div className="about-us-page">
       <div className="container">
         {/* Breadcrumb Navigation */}
         <nav className="about-breadcrumb" aria-label="Breadcrumb">
           <a 
-            href="#home" 
+            href="/" 
             onClick={(e) => {
               e.preventDefault();
               if (onNavigateHome) onNavigateHome();
-              else window.location.hash = 'home';
+              else window.history.pushState({}, '', '/');
             }}
           >
             Home
@@ -173,6 +173,12 @@ export default function AboutUs({ onNavigateHome }) {
                 href={brand.link} 
                 className="brand-card"
                 title={`Shop ${brand.name}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (onNavigateShop) {
+                    onNavigateShop({ brand: brand.name });
+                  }
+                }}
               >
                 <div className="brand-logo-container">
                   <img 

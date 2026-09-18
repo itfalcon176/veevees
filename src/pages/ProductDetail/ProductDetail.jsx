@@ -89,11 +89,11 @@ export default function ProductDetail({
       <div className="product-breadcrumbs-bar">
         <div className="container">
           <nav className="breadcrumbs-nav" aria-label="Breadcrumb">
-            <a href="#home" onClick={(e) => { e.preventDefault(); onNavigateHome(); }}>
+            <a href="/" onClick={(e) => { e.preventDefault(); onNavigateHome(); }}>
               Home
             </a>
             <ChevronRight size={14} className="breadcrumb-sep" />
-            <a href="#shop" onClick={(e) => { e.preventDefault(); onNavigateShop(); }}>
+            <a href="/shop/" onClick={(e) => { e.preventDefault(); onNavigateShop(); }}>
               Shop
             </a>
             <ChevronRight size={14} className="breadcrumb-sep" />
